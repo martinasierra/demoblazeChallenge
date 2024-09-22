@@ -6,8 +6,17 @@ Automation test of the https://demoblaze.com/ web page.
 
 ## :sparkles: Assignment ##
 
-:heavy_check_mark: Part 1: Save products from the first two pages in a text file;\
-:heavy_check_mark: Part 2: Buy a product;\
+:heavy_check_mark: Part 1: Save products from the first two pages in a text file\
+:heavy_check_mark: Part 2: Buy a product
+
+## :checkered_flag: Running Tests  ##
+
+To run tests, run the following command
+
+```bash
+  npx playwright test
+```
+
 
 ## :rocket: Technologies ##
 
@@ -21,8 +30,6 @@ The following tools were used in this project:
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
-
-```
 
 Made with :heart: by <a href="https://github.com/martinasierra" target="_blank">Marti</a>
 
