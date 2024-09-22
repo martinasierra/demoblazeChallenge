@@ -8,7 +8,7 @@ readonly xperiaButton:Locator;
   constructor(page: Page) {
 this.page = page;
 this.xperiaButton = page.getByRole('link', { name: 'Sony xperia z5' })
-this.cartButton = page.getByRole('link', { name: 'Add to cart' });
+this.cartButton = page.getByRole('link', { name: 'Cart', exact: true });
 
   };
 
