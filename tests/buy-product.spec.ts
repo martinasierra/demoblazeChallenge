@@ -53,10 +53,10 @@ test.describe('Buy product', () => {
         });
 
         await test.step('Press OK', async () => {
-            await orderPage.clickOkPurchase();
             await page.waitForTimeout(2000);
-            //await expect(orderPage.successModalTitle).not.toBeVisible();
-            await expect(page).toHaveURL(URL);
+            await orderPage.clickOkPurchase();
+            await expect(page).toHaveURL(`${URL}index.html`);
+            await expect(homePage.categoriesSection).toBeVisible();
         })
         
         
