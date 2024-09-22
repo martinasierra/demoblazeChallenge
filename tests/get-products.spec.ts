@@ -1,65 +1,60 @@
 import { test, expect } from '@playwright/test';
+import { HomePage } from '../pages/home.page';
 import axios from 'axios';
 import * as fs from 'fs';
 
 const baseURL = 'https://www.demoblaze.com';
-const filePath = 'products_infoPages.txt';
+const filePath = 'products_info.txt';
 
 test.describe('Extract products information and save to text file', () => {
   
-  test('Get products page 1', async ({ page }) => {
+  test('Get products from page 1 and 2', async ({ page }) => {
+  const homePage = new HomePage(page);
   await page.goto(baseURL);
+  await page.waitForSelector('#tbodyid');
 
-  // Esperar a que los productos se carguen
-  await page.waitForSelector('.card'); // Asegúrate de que los productos estén cargados
-
-  // Realizar la solicitud API al endpoint /entries
+  // Make the API request to the /entries endpoint
   try {
     const response = await axios.get('https://api.demoblaze.com/entries');
-    
-    // Asumimos que la respuesta tiene un formato JSON con la lista de productos en 'Items'
     const products = response.data.Items;
 
-    // Procesar los productos
-    let productText = 'Product Information:\n\n';
+    // Process products
+    let productText = 'Products Information:\n\n';
     products.forEach((product: any, index: number) => {
       productText += `Product ${index + 1}:\n`;
       productText += `Title: ${product.title}\n`;
       productText += `Price: $${product.price}\n`;
-      productText += `Link: https://www.demoblaze.com/prod.html?idp_=${product.id}\n\n`;
+      productText += `Link: ${baseURL}/prod.html?idp_=${product.id}\n\n`;
     });
 
-    // Guardar la información en un archivo de texto
-    const filePath = 'products_info3.txt';
+    // Save the information in a text file
     fs.writeFileSync(filePath, productText);
 
-    // Imprimir la ubicación del archivo
-   // console.log(`Product information saved to ${filePath}`);
+    // Verify that products have been extracted
+    expect(products.length).toBeGreaterThan(0);
+
   } catch (error) {
     console.error('Error fetching product information from API:', error);
   };
-   // Verificar que se hayan extraído productos
-  // expect(products.length).toBeGreaterThan(0);
+ 
+  // Go to products next page
+  await homePage.clickNext();
+  await page.waitForTimeout(2000);
+  await expect(homePage.nextPageButton).not.toBeInViewport();
 
-
-  await page.getByRole('button', { name: 'Next' }).last().click();
-  await page.waitForTimeout(4000);
-  await expect(page.locator('#next2')).not.toBeInViewport();
-  //await page.waitForSelector('.card'); // Asegúrate de que los productos estén cargados
-
-  // Seleccionar todos los productos
-  const products2 = await page.$$eval('.card', (cards, base) => {
-    return cards.map((card) => {
-      // Extraer la información deseada
-      const title = card.querySelector('.card-title a')?.textContent?.trim() || 'No Title';
-      const price = card.querySelector('.card-block h5')?.textContent?.trim() || 'No Price';
-      const link = card.querySelector('.card-title a')?.getAttribute('href') || 'No Link';
+  // Select all products
+  const products2 = await page.$$eval('.card', (products, base) => {
+    return products.map((product) => {
+      // Extract information
+      const title = product.querySelector('.card-title a')?.textContent?.trim() || 'No Title';
+      const price = product.querySelector('.card-block h5')?.textContent?.trim() || 'No Price';
+      const link = product.querySelector('.card-title a')?.getAttribute('href') || 'No Link';
       return { title, price, link: `${base}/${link}` };
     });
   }, baseURL);
 
-  // Formatear la información en un solo texto
-  let productText2 = 'Page 2:\n\n';
+  // Format information
+  let productText2 = 'Page 2\n\n';
   products2.forEach((productN, index) => {
     productText2 += `Product ${index + 1}:\n`;
     productText2 += `Title: ${productN.title}\n`;
@@ -67,10 +62,10 @@ test.describe('Extract products information and save to text file', () => {
     productText2 += `Link: ${productN.link}\n\n`;
   });
 
-  // Guardar la información en un archivo de texto
+  // Add the information to the text file
   fs.appendFileSync(filePath, productText2);
 
-  // Imprimir la ubicación del archivo
+  // Show file location
   console.log(`Product information saved to ${filePath}`);
  
 });
