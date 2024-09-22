@@ -4,11 +4,13 @@ export class HomePage {
 readonly page:Page;     //Variables
 readonly cartButton:Locator;
 readonly xperiaButton:Locator;
+readonly categoriesSection:Locator;
 
   constructor(page: Page) {
 this.page = page;
-this.xperiaButton = page.getByRole('link', { name: 'Sony xperia z5' })
+this.xperiaButton = page.getByRole('link', { name: 'Sony xperia z5' });
 this.cartButton = page.getByRole('link', { name: 'Cart', exact: true });
+this.categoriesSection = page.getByRole('link', { name: 'CATEGORIES' });
 
   };
 

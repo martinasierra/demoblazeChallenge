@@ -32,8 +32,7 @@ this.yearInput = page.locator('#year');
 this.purchaseButton = page.getByRole('button', { name: 'Purchase' });
 this.successModalTitle = page.getByRole('heading', { name: 'Thank you for your purchase!' });
 this.successAmount = page.locator('xpath=//body/div[10]/p');
-this.acceptModalPurchase = page.locator('.sa-confirm-button-container')
-                               .filter({ has: page.getByRole('button', { name: 'OK', exact: true }) })
+this.acceptModalPurchase = page.locator('.sa-confirm-button-container');
 
   };
 
@@ -80,7 +79,7 @@ async clickPurchase(){
 };
 
 async clickOkPurchase(){
-  await this.acceptModalPurchase.click();
+  await this.acceptModalPurchase.click({'force': true });
 };
   
 };
