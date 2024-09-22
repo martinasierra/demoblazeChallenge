@@ -1,4 +1,4 @@
-Product Information:
+Products Information:
 
 Product 1:
 Title: Samsung galaxy s6
@@ -42,6 +42,39 @@ Link: https://www.demoblaze.com/prod.html?idp_=8
 
 Product 9:
 Title: Sony vaio i7
+
 Price: $790
 Link: https://www.demoblaze.com/prod.html?idp_=9
+
+Page 2
+
+Product 1:
+Title: Apple monitor 24
+Price: $400
+Link: https://www.demoblaze.com/prod.html?idp_=10
+
+Product 2:
+Title: MacBook air
+Price: $700
+Link: https://www.demoblaze.com/prod.html?idp_=11
+
+Product 3:
+Title: Dell i7 8gb
+Price: $700
+Link: https://www.demoblaze.com/prod.html?idp_=12
+
+Product 4:
+Title: 2017 Dell 15.6 Inch
+Price: $700
+Link: https://www.demoblaze.com/prod.html?idp_=13
+
+Product 5:
+Title: ASUS Full HD
+Price: $230
+Link: https://www.demoblaze.com/prod.html?idp_=14
+
+Product 6:
+Title: MacBook Pro
+Price: $1100
+Link: https://www.demoblaze.com/prod.html?idp_=15
 
